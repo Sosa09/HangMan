@@ -39,7 +39,7 @@
                 bool _maxAttemptsReached = false;
 
 
-                while(!_isWordFound || !_maxAttemptsReached)
+                while(!_isWordFound && !_maxAttemptsReached)
                 {
                     Console.Clear();
                     Console.WriteLine($"Attempts:    {_nrOfGuesses}");
