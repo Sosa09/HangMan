@@ -6,14 +6,14 @@
         {
 
             //initializing an instance of Random to randomly pick up a work from List _words
-            Random _random = new Random();
+            Random random = new Random();
 
             const char LETTER_NOT_FOUND_CHARACTER = '_';
             const int TOTAL_CHANCES = 10;
             const char EMPTY_CHAR_CHECK = '\0';
 
             //initialize an instance of collection List that holds strings
-            List<string> _words = new List<string>
+            List<string> words = new List<string>
             {
                 "rakete",
                 "menotring",
@@ -29,24 +29,24 @@
             {
 
                 //pick up a word from the list randomly
-                string _pickUpWord = _words[_random.Next(0, _words.Count)];
+                string pickUpWord = words[random.Next(0, words.Count)];
 
                 //initialzing userFoundChars array that will hold the chars that the end user has found
-                char[] _userFoundChars = new char[_pickUpWord.Length];
-                int _charFoundCount = 0;
-                int _nrOfGuesses = 0;
-                bool _isWordFound = false;
-                bool _maxAttemptsReached = false;
+                char[] userFoundChars = new char[pickUpWord.Length];
+                int charFoundCount = 0;
+                int nrOfGuesses = 0;
+                bool isWordFound = false;
+                bool maxAttemptsReached = false;
 
 
-                while(!_isWordFound && !_maxAttemptsReached)
+                while(!isWordFound && !maxAttemptsReached)
                 {
                     Console.Clear();
-                    Console.WriteLine($"Attempts:    {_nrOfGuesses}");
+                    Console.WriteLine($"Attempts:    {nrOfGuesses}");
                     Console.Write("FOUND:\t\t\t");
 
                     //Update the console to display the evolution
-                    foreach (char letter in _userFoundChars)
+                    foreach (char letter in userFoundChars)
                     {
                         if (letter != EMPTY_CHAR_CHECK)
                             Console.Write($"{letter} ");
@@ -57,37 +57,38 @@
                     Console.WriteLine("\n\nPLEASE ENTER A LETTER: ");
 
                     //Ask user to enter a character
-                    char _userInput = Console.ReadKey().KeyChar;
+                    char userInput = Console.ReadKey().KeyChar;
 
 
                     //looping through the random word to check if userinput matches any char of the word
-                    for(int i = 0; i < _pickUpWord.Length; i++)
+                    for(int i = 0; i < pickUpWord.Length; i++)
                     {
-                        if (_pickUpWord[i] == _userInput)
+
+                        if (pickUpWord[i] == userInput)
+                        {
                             //Checking if a letter has already been placed at the index where a match was found (for words where letters appears twice or more)
-                            if (_userFoundChars[i] == EMPTY_CHAR_CHECK)
-                            {
-                                _userFoundChars[i] = _userInput;
-                                _charFoundCount++;
-                                break;
-                            }
+                            userFoundChars[i] = userInput;
+                            charFoundCount++;
+                        }
+              
+                            
                     }
 
                     //Comparing the length of the Random word and User Guess if they are equal user has won
-                    if (_charFoundCount == _pickUpWord.Length)
+                    if (charFoundCount == pickUpWord.Length)
                     {
                  
-                        Console.WriteLine($"Great you found the word {_pickUpWord} after {_nrOfGuesses} guesses.");
-                        _isWordFound = true; //HELP after updating the value from false to true the while loop still executes
+                        Console.WriteLine($"Great you found the word {pickUpWord} after {nrOfGuesses} guesses.");
+                        isWordFound = true; //HELP after updating the value from false to true the while loop still executes
 
                     }
-                    else if(_nrOfGuesses == TOTAL_CHANCES)
+                    else if(nrOfGuesses == TOTAL_CHANCES)
                     {
-                        Console.WriteLine($"Oooh you lost {TOTAL_CHANCES} reached, the word was {_pickUpWord}.");
-                        _maxAttemptsReached = true; //HELP after updating the value from false to true the while loop still executes
+                        Console.WriteLine($"Oooh you lost {TOTAL_CHANCES} reached, the word was {pickUpWord}.");
+                        maxAttemptsReached = true; //HELP after updating the value from false to true the while loop still executes
                         
                     }
-                    _nrOfGuesses++;
+                    nrOfGuesses++;
                     
                 }
 
